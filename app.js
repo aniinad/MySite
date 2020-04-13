@@ -6,7 +6,7 @@ app.use(express.static("public"));
 
 // app.set("view engine", "ejs");
 
-app.listen(5000,function(){
+app.listen(process.env.PORT,function(){
     console.log("Service started");
 });
 
