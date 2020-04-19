@@ -35,7 +35,32 @@ nav{
 h1{
     font-family: 'Permanent Marker', cursive;
 }
-
+#login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+#contactForm .jumbotron {
+    background: #358CCE;
+    color: #FFF;
+    border-radius: 0px;
+    }
+    #contactForm .jumbotron-sm { padding-top: 24px;
+    padding-bottom: 24px; }
+    #contactForm .jumbotron small {
+    color: #FFF;
+    }
+    #contactForm  .h1 small {
+    font-size: 24px;
+    }
 @media (min-width: 768px) {
     #citem1 .jumbotron {
       padding: 20px;
