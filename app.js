@@ -12,7 +12,7 @@ app.use(express.static("public"));
 // useNewUrlParser:true,
 // useUnifiedTopology:true
 // });
-mongoose.connect(process.env.MONGODB_URI||"mongodb://aniinad:123@cluster0-shard-00-00-rigfj.azure.mongodb.net:27017,cluster0-shard-00-01-rigfj.azure.mongodb.net:27017,cluster0-shard-00-02-rigfj.azure.mongodb.net:27017/mysite?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI||"mongodb+srv://aniinad:123@cluster0-rigfj.azure.mongodb.net/mysite?retryWrites=true&w=majority",{useNewUrlParser: true});
 const conn = mongoose.connection;
 mongoose.connection.once('open', () => { console.log('MongoDB Connected'); });
 mongoose.connection.on('error', (err) => { console.log('MongoDB connection error: ', err); }); 
