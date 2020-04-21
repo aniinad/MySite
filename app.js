@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var passport = require("passport");
+var nodemailer = require("nodemailer");
 
 var  mongoose = require("mongoose");
 var bodyParser = require("body-parser");
@@ -54,6 +55,33 @@ app.get("/about", function(req,res){
 });
 app.get("/contact", function(req,res){
     res.render("contact.ejs");
+});
+app.post("/contact", function(req,res){
+    //email sending logic goes here
+     // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'chow.anil@gmail.com',
+        pass: 'Need to add'
+    }
+  });
+
+  // send mail with defined transport object
+    transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "chow.anil@gmail.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>" // html body
+  },(err,info)=>{
+      if(err){
+          return console.log(err);
+      }
+      console.log("Message sent: %s", info.messageId);
+  });
+
+  
 });
 app.get("/gallary", function(req,res){
     res.render("gallary.ejs");

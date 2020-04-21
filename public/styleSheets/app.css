@@ -1,4 +1,6 @@
-
+body{
+    font-family: 'Yatra One', cursive;
+}
 
 nav{
     width: 100%;
@@ -10,6 +12,11 @@ nav{
     font-weight: 600; 
 }
 
+.card {
+    padding: 2em;
+    margin: 2em;
+    border: none;
+  }
 .navbar-nav li{
     margin: 0 20px;
 }
@@ -33,7 +40,8 @@ nav{
     /* object-fit: cover; */
 }
 h1{
-    font-family: 'Permanent Marker', cursive;
+    /* font-family: 'Permanent Marker', cursive; */
+    font-family: 'Yatra One', cursive;
 }
 #login .container #login-row #login-column #login-box {
     margin-top: 120px;
