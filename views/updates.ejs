@@ -1,5 +1,36 @@
 <%- include('partials/header.ejs') %>
-Updates Go here...It's only allowed if you are Logged in
+<div class="container">
+<div class="jumbotron">
+    <h1 class="display-4">Updates</h1>    
+    <hr class="my-4">
+    <p>New delivery updates goes here.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/posts/new" role="button"><i class="fa fa-code" aria-hidden="true"></i>   Add New Post</a>
+    </p>
+  </div>
 
+<% for(var i= 0; i < posts.length; i++){ %>
 
-<%- include ('partials/footer.ejs') %>
+<div class="card">
+    <div class="card-header">
+        Posted at: <%=posts[i].time%>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><%=posts[i].title%></h5>
+        <p class="card-text"><%=posts[i].description%></p>
+        <a href="#" class="btn btn-primary">... Read More</a>
+        <a href="#" class="btn btn-info"><i class="fa fa-edit"></i> Edit Post</a>
+        <a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete Post</a>
+        <div class="well text-center">
+            <div class="row ">
+                <div class="col-md-3 col-sm-12" style="display: inherit;">
+                    <% for(var j=0; j<posts[i].images.length; j++){ %>
+                    <img src=<%=posts[i].images[j]%> class="img-thumbnail rounded my-1 mx-1">
+                <%}%>
+                 </div>           
+          </div>
+        </div>
+      </div>  
+    </div>  
+
+   <%} %></div> <%- include ('partials/footer.ejs') %>

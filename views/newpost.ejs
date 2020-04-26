@@ -1,0 +1,33 @@
+<%- include('partials/header.ejs') %>
+<div class="container">
+
+<h1 class="display-6"><strong>New Post</strong></h1>
+<form action="/posts" method="post">
+    <div class="form-group">
+      <label for="lblForTitle">Title</label>
+      <input type="text" name="title" class="form-control col-md-6" id="lblForTitle" required placeholder="Enter Title">
+      <small id="title" class="form-text text-muted">what should be displayed in your title..</small>
+    </div>
+    <div class="form-group">
+        <label for="lblFordescription">Post</label>
+        <textarea class="form-control col-md-6" name="description" id="lblFordescription" rows="6"></textarea>
+    </div>
+     
+      <div class="form-group">
+        <label for="lblForTitle">Image URL</label>
+        <input type="text" class="form-control col-md-6" name="imagelink" id="lblForTitle" required placeholder="Enter Image URL Here">
+      </div>
+      <button type="submit" class="btn btn-info mb-2">Add Images</button>
+      
+      
+    <div class="form-group">
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-primary " href="/posts" role="button"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to Posts</a>
+    </div>
+  </form>
+ 
+ 
+ 
+</div>
+
+<%- include ('partials/footer.ejs') %>

@@ -7,12 +7,13 @@ var  mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
+var Post = require("./models/post");
 
 var  rPromise = require("request-promise"); 
 app.use(express.static("public"));
 
 
-mongoose.connect(process.env.MONGODB_URI||"mongodb+srv://aniinad:123@cluster0-rigfj.azure.mongodb.net/mysite?retryWrites=true&w=majority",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI||"mongodb+srv://aniinad:123@cluster0-rigfj.azure.mongodb.net/mysite?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true});
 const conn = mongoose.connection;
 mongoose.connection.once('open', () => { console.log('MongoDB Connected'); });
 mongoose.connection.on('error', (err) => { console.log('MongoDB connection error: ', err); }); 
@@ -22,6 +23,7 @@ app.set("view engine", "ejs");
 app.listen(process.env.PORT||8000,function(){
     console.log("Service started");
 });
+
 
 
 //Passport Configuration
@@ -44,7 +46,7 @@ app.use(function(req,res,next){
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/", function(req,res){
-    console.log(req.user);
+    
     res.render("index.ejs");
 });
 app.get("/home", function(req,res){
@@ -87,9 +89,42 @@ app.get("/gallary", function(req,res){
     res.render("gallary.ejs");
 });
 
-app.get("/updates",isLoggedIn,function(req,res){
-    res.render("updates.ejs");
+app.get("/posts",function(req,res){ 
+   
+    Post.find({},function(err,allposts){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {            
+            res.render("updates.ejs",{posts:allposts});
+        }
+    });
 })
+
+//Form to add a newpost
+app.post("/posts",function(req,res){    
+    Post.create({
+        title:req.body.title,
+        description:req.body.description,
+        images:[req.body.imagelink]
+    },function(err,newPost){
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            res.redirect("/posts");
+        }
+    })
+})
+
+
+app.get("/posts/new",function(req,res){
+    res.render("newpost");
+})
+
 
 //Auth routes
 app.get("/register",function(req,res){
@@ -102,7 +137,7 @@ app.post("/register", function(req,res){
         req.body.password,function(err, user){
             if(err)
             {
-                console.log(err);
+                
                 return res.render("register");
             }
             passport.authenticate("local")(req,res,function(){
@@ -118,7 +153,7 @@ app.get("/login", function(req,res){
 })
 
 app.post("/login",passport.authenticate("local",
-{successRedirect:"/updates",
+{successRedirect:"/posts",
 failureRedirect:"/login"
 }),function(req,res){
 
@@ -149,7 +184,7 @@ function isLoggedIn(req,res,next)
 app.get("/movie", function(req,res){
     //res.render("movieSearch.ejs");
     var searchKey = req.query.search;
-    console.log(searchKey);
+    
     rPromise("http://www.omdbapi.com/?s="+searchKey+"&apikey=thewdb").then((str)=>{
         var movieList = JSON.parse(str);
         
